@@ -1,0 +1,80 @@
+<div class="wrapper edit_card_menu_wrapper">
+  {{#if archived}}
+    <div class="archived_header">This card is archived.</div>
+  {{/if}}
+  <div class="card_content_header">
+    <div class="card_title_info">
+      <div class="card_title_placeholder">
+        <h3>{{title}}</h3>
+      </div>
+      <div class="invisible new_card_title_input">
+        <input type="text" id="new_card_name" name="new_card_name" autofocus spellcheck="false" dir="auto" maxlength="512" value="{{title}}" style="overflow: hidden; word-wrap: break-word; height: 24px;">
+      </div>
+    </div>
+      <p>in list <a href="" class="move_title_link">{{listTitle}}</a></p>
+  </div>
+  <i class="icon-cancel close_edit_card"></i>
+  <div class="card_content">
+    <div class="card_edit_menu_labels">
+      {{#if labels}}
+        <p>Labels</p>
+        <div class="card_item_labels_display">
+      {{#each labels}}
+        <span class="label_{{this.color}}"></span>
+      {{/each}}
+        </div>
+      {{/if}}
+    </div>    
+    <div class="card_description">
+      {{#if description}}
+      <p>Description
+        <a href="" class="edit_card_description">
+          <span> Edit</span>
+        </a>
+      </p>
+      <p class="card_description_text">{{description}}</p>    
+      {{else}}
+        <i class="icon-description"></i>
+        <a href="" class="edit_card_description">
+          <span>Edit the description...</span>
+        </a>      
+      {{/if}}
+    </div>
+    <div class="invisible edit_card_description_popover">
+      <p>Description</p>
+      <form autocomplete="off" method="" action="">
+        <textarea class="card_description_input" style="overflow: hidden; word-wrap: break-word; resize: none; height: 108px;">{{description}}</textarea>
+        <div class="add_description submit_info_button">Save</div>
+        <i class="icon-cancel cancel_submission close_card_edit_description"></i>
+      </form>
+    </div>
+    <div class="card_comments">
+      <i class="icon-comment"></i><h3>Add Comment</h3>
+      <form autocomplete="off">
+        <textarea placeholder="Write a comment..." class="comment_input"></textarea>
+        <div class="send_comment_wrapper"><div class="send_comment submit_info_button">Send</div></div>
+      </form>
+    </div>  
+    {{> activity}}
+  </div>
+  <div class="card_action_menu">
+    <div class="card_add_menu">
+      <h3>Add</h3>
+      <div class="menu_button labels"><i class="icon-label"></i>Labels</div>  
+    </div>
+    <div class="card_actions_menu">
+      <h3>Actions</h3>
+      <div class="menu_button move_card"><i class="icon-move"></i>Move</div>
+      <div class="menu_button copy_card"><i class="icon-copy"></i>Copy</div> 
+      {{#if archived}}
+        <hr>
+        <div class="menu_button delete_card_warning"><i class="icon-delete"></i>Delete</div>
+        <div class="menu_button unarchive_card"><i class="icon-unarchive"></i>Send to board</div>   
+      {{else}}
+        <div class="menu_button archive_card"><i class="icon-archive"></i>Archive</div>   
+      {{/if}}
+            
+    </div>
+  </div>
+</div>
+

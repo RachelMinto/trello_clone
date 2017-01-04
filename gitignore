@@ -1,0 +1,213 @@
+application.js “glue”
+
+If time at end:
+  -set up username as it's own data .json file so it can be read in.
+
+Questions I had to ask myself: 
+  How to break up the code into manageable chunks. 
+  How to store data between sessions. Ideally for scale: database. I chose session storage.
+  Make Lists a single view, or a collection of views. Chose collection for ease of modification of the model since cards will be edited frequently and the full collection shouldn't be rerendered with edit of a single card.
+  Need to be able to filter cards. That means the board should have access to all of the cards within its lists. To scale to a larger app, would need to reconfigure this to allow for cross-board search. Shouldn't be too difficult to make a user-wide search across all boards.
+  Images: Trello uses an icon font; I used a sprite sheet for sake of time.
+  How will I do the drag and drop resort logic for both lists and cards?
+  Do I want list actions to be its own view? 
+  Do I have list view within board view, or created by App?
+  Should the side menu activites and comments be updating even when not in view?
+  What should parse the original data? Thought at first maybe App (controller), then thought to create an API that the model could interact with. Decided to bootstrap to layout.jade for http efficiency. 
+  Decided to write lists to board canvas, which was part of the board_top hbs. That way, the board top will be written first and the canvas will be ready. Alternative is to separate the two and write both to elements in layout.
+  Decoupled board view from lists view and made them unaware of each other.
+
+  When moving a list item, should I keep the same view coupled to it or render a new view? Decided to decouple and render a new view. 
+
+  How do I keep track of model and list ids? At first i had it on the controller, but it was too hard to automatically update with submitted content from forms, and keeping all models, DOM, etc. in sync was difficult. Simplified it by having the server assign and track the ids. It's kind of makeshfit compared to 
+ 
+ http://jsfiddle.net/nikoshr/947Vf/
+
+DECIDE: Archive lists as separate, or as simple attribute on list? Handlebar templates could filter. Keeps it aligned with original lists/collections. Update status on unarchive? Problem to have "ghost" lists/positions? May need to decide after I figure out how I'm going to be sorting.
+
+API
+
+GET     /board (**All default_board data)
+PUT     /board  **Update board
+
+GET     /board/:listID/items  **Get list data
+POST    /board/:listID/items  **Update list items
+PUT     /board/:listID/items  **Update a list item / includes archive a list item.
+DELETE  /board/:listID/items  **Destroy a list
+
+GET     /board/lists **get all lists
+POST    /board/lists **Create a list
+PUT     /board/lists **Update a list 
+DELETE  /board/lists  **Delete a list
+
+
+Ideas for presentation
+  Analogy: don't focus on one part of a drawing, then move on. Broader scope more elastic.
+
+Data Structure:
+Username
+BoardsArray
+  TitleOfBoard
+  Starred (t/f)
+  Color
+  ListsArray
+    TitleOfList
+    Position (number)
+    Subscribed (t/f)
+    CardsArray
+      TitleOfCard
+      Subscribed (t/f)      
+      Description
+      ChecklistArray
+      CommentsArray
+      ActivityArray
+      AttachmentsArray
+
+  For this app, opted for a data structure one level down - just a single board.
+
+Views
+  -Header
+    -State: User
+    - Subscriber for Activity Notifications
+  -Board
+    - Model: Board 
+    - State: color, lists, activity, comments, members
+    - Events: Add a List (click event), show menu
+  -List (Draggable)
+    - Model: List
+    - State: Position, Board (may need back reference to collection), Cards, User subscribed (t/f),
+    - Events: Drag & drop (update board order); Add card; Open List Actions Menu; Copy List, Move List, Subscribe, Move All Cards, Archive all Cards, Archive this list
+    - Listens to Card model.
+  -List Action Menu (???)
+    Model: List
+  -Card (Draggable, draggable within list to change order)
+    Model: Card
+    State: Position, List (back reference to list, which knows about board)
+  -Edit Card
+    Model: Card
+  -Quick Edit Card
+    Model: Card
+  -Side Menu
+    Model: Board (collection)?
+ 
+Models
+  -Card
+    -should add to activity tracker when modified
+    -
+  -List
+  -Comment
+  -ChecklistItem
+  -User
+  -Activity
+ 
+Collections
+  -List
+  -Board (includes lists, users)
+  -Checklist
+  -Activity
+ 
+Events
+  -Create List
+  -Edit List
+  -Rename List title on click
+  -Copy List
+  -Move List
+  -Archive List
+  -Archive all Cards in List
+  -Search
+  -Filter cards by various criteria
+  -Show menu: slides in and out of view of right side of screen. https://api.jqueryui.com/slide-effect/
+ 
+ 
+  -Create Card
+  -Edit Card
+  -Copy Card
+  -Move Card
+  -Drag and drop to move card (both list collections must update)
+  -Edit Card
+  -Destroy Card
+  -Archive Card
+  -Apply labels (give label div title)
+  -Add comment
+  -Edit Comment
+  -Delete comment
+  -Add due date
+  -Add an attachment (optional)
+  -add a checklist
+ 
+  -Subscribe to Notifications
+  -Notify on change
+ 
+Routes
+  -pushState for cards
+ 
+Publish & Subscribe relationships
+P: Card, S: ListItem view
+  
+HTML
+  -Header and Subheader are fluid, floated divs
+  -Lists are static
+  -Drag and drop lists
+
+  -PopupMenu div
+    -relative position to parent click
+      $(popupDiv).offset({ top: mousePos.y, left:  mousePos.x});
+    -Use handlebar template to populate?
+ 
+ul
+  -Lists on board (inline block)
+  -List items (block)
+  -Checklist (block)
+  -Card action items (block)
+
+overlays
+  -EditCardView
+  -QuickEditCardView
+ 
+Handlebars
+  Activity
+  List Item Card
+  Edit Card **should include Archive at top set to display: none Add class to show.
+  Popup
+
+ 
+CSS
+html font: 14px "Helvetica Neue",Arial,Helvetica,sans-serif
+-one media size modification
+-bg color modifiable by user
+  -Max height on list is set to viewport
+
+include /_mixins
+
+doctype html
+html
+  head
+    title Trello
+    +stylesheet_link_tag("application")
+    +javascript_include_tag("vendor/all")
+    +javascript_include_tag("handlebars_templates")
+  body
+    header
+
+    main
+      block content
+
+    footer
+
+      +javascript_include_tag("application") 
+      +javascript_include_tag("models/card", "models/activity", "models/checklist_item", "models/comment", "models/user")
+      +javascript_include_tag("collections/list", "collections/board", "collections/activities", "collections/comments")
+      +javascript_include_tag("views/board", "views/card_list_item", "views/edit_card", "views/header", "views/list", "views/quick_edit_card")
+      script(type="text/javascript").
+        App.default_board = new FoodItems(!{JSON.stringify(food_items)});      
+      +javascript_include_tag("router")
+      block scripts  
+
+
+
+TO DO Items
+
+-Allow user to input a description.
+-Allow user to add comment.
+-Render all activity statements properly
+-Create general popup menu template for labels, checklist, due date etc.

@@ -1,0 +1,230 @@
+.archived_header
+  height: 25px
+  background-color: red
+
+.edit_card_menu_wrapper 
+  position: relative
+  i.icon-cancel
+    position: absolute
+    top: 0
+    right: 0
+    font-size: 24px
+    font-weight: 200
+
+.edit_card_menu
+  .wrapper
+    width: 730px
+    min-height: 604px
+    margin: 0 auto
+    margin-top: 48px
+    margin-bottom: 80px
+    background: #EDEFF0
+    h3
+      margin-bottom: 12px
+      margin-top: 20px
+    .card_action_menu
+      float: right
+      padding: 8px 12px 12px 0
+      width: 140px
+      height: 499px
+      margin-right: 20px
+      .card_actions_menu
+        a
+          margin-top: 20px
+          display: block
+
+.card_title_info
+  width: 616px
+  display: inline-block
+
+i.icon-cancel
+  height: 30px
+  width: 30px
+  padding: 10px
+  text-align: center 
+  cursor: pointer
+
+.menu_button          
+  menu_button()
+  &:hover
+    cursor: pointer
+    color: colors.primary.default    
+    border-color: #298FCA #298FCA #026AA7
+    background: #298FCA 
+
+.card_menu_popup.wrapper
+  width: 300px
+  background: colors.primary.default
+  padding: 10px
+  box-sizing: border-box
+  margin-top: 0
+
+.edit_card_popup
+  .card_label
+    width: 240px
+    height: 34px
+    display: block
+    cursor: pointer
+    transition: padding 85ms,margin 85ms,box-shadow 85ms
+    border-radius: 3px
+    margin-left: 4px
+    margin-top: 4px
+
+.card_content
+  position: relative
+  .card_item_labels_display
+    span
+      box-sizing: border-box
+      height: 30px
+      line-height: 30px
+      margin: 0 4px 4px 0
+      min-width: 40px
+      padding: 0 10px
+      border-radius: 3px
+
+.card_label.label_green   
+  &:hover
+    box-shadow: -8px 0 #519839
+
+.card_label.label_orange
+  &:hover
+    box-shadow: -8px 0 #D29034
+
+.card_label.label_red
+  &:hover
+    box-shadow: -8px 0 #B04632
+
+.card_label.label_yellow
+  &:hover
+    box-shadow: -8px 0 #D9B51C
+
+.card_label.label_blue
+  &:hover
+    box-shadow: -8px 0 #055A8C
+
+.card_label.label_purple
+   &:hover
+    box-shadow: -8px 0 #89609E
+
+.card_content
+  display: inline-block
+  padding: 8px 12px 12px 10px
+  width: 508px
+  box-sizing: border-box
+  i
+    position: absolute
+    left: 8px
+    font-size: 24px
+
+.card_action_menu
+  display: inline-block
+  padding: 8px 12px 12px 0
+  width: 140px
+  box-sizing: border-box
+
+.card_content_header
+  padding-top: 12px
+  padding-left: 50px
+  h3
+    font-size: 18px
+    display: inline-block
+  i
+    float: right
+    font-size: 24px
+
+textarea.comment_input
+  height: 75px
+  resize: none
+  border: 0
+  border-bottom: solid 30px transparent
+  padding: 9px 11px 0px 11px
+  width: 100%
+  box-sizing: border-box
+  font-size: 14px
+
+.send_comment_wrapper
+  margin-top: 8px
+  height: 36px
+
+.posted_comment_content  
+  background: #fff
+  padding: 10px
+  box-sizing: border-box
+  display: inline-block
+  margin: 10px 0
+
+.submit_info_button
+  button()
+  submit_button_inactive()
+
+.new_card_title_input
+  input
+    standard_text_input()
+
+.activities_header
+  h3
+    display: inline-block
+  a
+    float: right;    
+
+.archived_header
+  background-color: #FDFAE5
+  background-image: linear-gradient(to bottom right,rgba(0,0,0,.05) 25%,transparent 25%,transparent 50%,rgba(0,0,0,.05) 50%,rgba(0,0,0,.05) 75%,transparent 75%,transparent)
+  background-size: 14px 14px
+  min-height: 30px
+  padding: 9pt 9pt 9pt 50px
+  font-size: 18px
+
+.menu_button.delete_card_warning
+  background: #EB5A46
+  border-color: #EB5A46 #EB5A46 #B04632
+  color: #fff
+  &:hover
+    background: #CF513D
+    border-color: #CF513D #CF513D #933B27
+
+.card_edit_menu_labels,
+.card_description
+  margin-left: 42px    
+  p
+    margin-bottom: 8px
+    margin-top: 16px
+
+.card_description
+  margin-top: 16px
+
+.card_comments
+  h3,
+  form
+    margin-left: 42px
+
+.edit_card_menu_wrapper
+  a
+    color: #8c8c8c
+  .activities_header
+    margin-left: 0
+    i
+      line-height: 50px
+  .all_activities
+    margin-left: 0
+  .card_activities
+    margin-top: 16px
+    margin-left: 42px
+
+.edit_card_description_popover
+  margin-left: 42px
+  textarea
+    textarea_subtle()
+    margin-top: 10px
+    width: 100%
+
+textarea.copy_card_title_text
+  textarea_subtle()
+  margin-top: 10px
+  width: 240px    
+
+i.icon-cancel.close_card_edit_description    
+  position: relative
+
+.card_description
+  margin-top: 16px  

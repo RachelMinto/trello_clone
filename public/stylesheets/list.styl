@@ -1,0 +1,139 @@
+.list_header
+  flex: none
+  h3, span
+    display: inline-block
+    color: colors.secondary.color
+    padding: 10px
+    width: 200px
+  h3
+    padding: 11px 10px
+  span
+    float: right
+    padding: 4px
+    width: 26px
+    height: 26px
+    &:hover
+      cursor: default
+
+.list_content_wrapper
+  border-radius: 3px
+  box-sizing: border-box
+  display: flex
+  flex-direction: column
+  max-height: 100%
+  position: relative
+
+ul.list_container
+  min-height: 10px
+  overflow-y: auto
+  flex: 1 1 auto
+  li.ui-sortable-handle
+    list_item()
+
+.add_card
+  box-sizing: border-box
+  padding: 10px
+  border-radius: 0 0 3px 3px
+  text-decoration: none
+  width: 100%
+  flex: none
+  &:hover
+    cursor: pointer
+    text-decoration: underline
+    background-color: #CDD2D4
+    color: #4d4d4d
+
+#add_list_input
+  display: inline-block
+  margin: 0 8px
+  vertical-align: top
+  input
+    border-radius: 4px
+    padding: 7px
+    width: 248px
+    height: 18px
+    color: rgba(255,255,255,.7)
+    background: rgba(0,0,0,.1)
+    &:hover
+      background: rgba(0,0,0,.2)
+
+.list-wrapper
+  box-sizing: border-box
+  display: inline-block
+  vertical-align: top
+  width: 270px
+  height: 100%
+  flex-shrink: 0
+
+.ui-sortable-placeholder
+  background: rgba(0,0,0,.2)
+  min-width: 270px
+  max-width: 270px
+  margin-left: 8px 
+  
+.card_item_labels_display
+  span
+    display: inline-block
+    border-radius: 10px
+    width: 40px
+    margin-right: 2px
+    height: 7px    
+
+.card_icons
+  color: colors.secondary.secondary_color
+  padding: 10px 0
+  a
+    text-decoration: none
+  span
+    padding-bottom: 1px 2px
+    margin: 0 4px 4px 0
+
+.new_list_title_input
+  input
+    standard_text_input()
+    padding: 3px 5px
+    margin: 5px 5px
+    width: 216px
+    height: 18px
+
+.list_action_options
+  div
+    cursor: pointer
+    font-weight: 700
+    padding: 6px 10px
+    margin: 0 -10px
+    &:hover
+      background-color: #298FCA
+      color: #fff
+
+form.addCardForm
+  input
+    width: 240px
+    height: 74px
+    list_item()
+
+.submit_new_card.submit_info_button
+  margin: 0 8px 8px 8px
+  text-decoration: none
+
+.add_card_composer
+  .icon-cancel
+    font-size: 24px
+    color: #8c8c8c
+    &:hover
+      color: #4d4d4d
+
+.add_list_input_field
+  .icon-cancel
+    font-size: 24px
+    color: #8c8c8c
+    &:hover
+      color: #4d4d4d
+
+.submit_info_button#add_new_list
+  margin: 8px
+
+#add_list_name_input
+  display: block
+  &:focus
+    color: #4d4d4d
