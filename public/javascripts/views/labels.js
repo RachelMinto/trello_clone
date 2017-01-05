@@ -7,6 +7,7 @@ var LabelPopup = Backbone.View.extend({
   },
   el: "div",
   closeModal: function() {
+    this.undelegateEvents();  
     $('.pop-over').attr('class', 'pop-over');
   },
   preventClose: function() {
@@ -17,6 +18,9 @@ var LabelPopup = Backbone.View.extend({
     $('.pop-over').html(this.template(this.model.toJSON()));
   },
   toggleLabel: function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    debugger;
     var labelColor = $(e.target).data("color");
     this.model.toggleLabel(labelColor);
     return false;

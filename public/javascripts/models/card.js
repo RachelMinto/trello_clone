@@ -90,6 +90,7 @@ var Card = Backbone.Model.extend({
     this.syncServer();
   },
   toggleLabel: function(color) {
+    debugger;
     var labels = this.get('labels');
 
     if (_(labels).findWhere({ color: color })) {
